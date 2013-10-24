@@ -1,14 +1,10 @@
 <?php
-//THIS CLASS IS RESPONSIBLE TO MANAGE THE CAHCE
+//This class is responsible to manage the cahce
+
 class CacheManager
 {
-	public static $cacheIndex=array();
-	public static $_cachemanagerInstance=null;
-	public function getInstance()
-	{
-       if(self::$_cachemanagerInstance==null)
-       	self::$_cachemanagerInstance=new CacheManager();
-       return self::$_cachemanagerInstance;
+	function __construct() {
+
 	}
 }
 ?>

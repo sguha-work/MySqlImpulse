@@ -1,6 +1,10 @@
 <?php
-//THIS CLASS IS RESPONSIBLE TO WRITE DATA TO CACHE AND 
-//GETTING VALUES FROM CASCHE 
+
+/**
+*This class is following the singleton pattern and is responsible for reading data from cache array
+*and writing data to cache array
+*/
+
 class Cache
 {
 	private static $CacheArray=array();
@@ -14,19 +18,20 @@ class Cache
 		}
 		return $cache_object;
 	}
-	public function writeToCache( $index, $data ) {
+	public function writeToCache( $index = null, $data ) {
 	  $serializeData = serialize($data);	
       if( $index == null ) {
-      	die('Error:No Index Specified.Unable to write cahce');
+      	die("Error:No Index Specified.Unable to write cahce");
       }
       self :: $CacheArray[ $index ] = serialize( $data );
       return true;
 	}
-	public function getFromCache($fileName)
+	public function getFromCache( $index = null )
 	{
-      $serializeData=file_get_contents($fileName);
-      $data=array();
-      $data=unserialize($serializeData);
+      if( $index == null ) {
+      	die("Error:No Index Specified.Unable to read from cahce")
+      }
+      $data = unserialize(self :: $CacheArray[ $index ]);
       return $data;
 	}
 }

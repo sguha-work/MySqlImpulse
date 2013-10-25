@@ -16,11 +16,13 @@
 
 ?>
 <?php
+error_reporting(E_ALL);
 define("IMPULSE_BASEPATH", realpath(dirname(__FILE__)).DIRECTORY_SEPARATOR);
 include_once 'database.php';
 include_once 'configure.php';
 include_once IMPULSE_BASEPATH.'system/errorText.php';
 include_once IMPULSE_BASEPATH.'system/Cache.php';
+include_once IMPULSE_BASEPATH.'system/QueryQueue.php';
 include_once IMPULSE_BASEPATH.'system/CacheManager.php';
 final class MySqlImpulse {
 	//MEMBER VARIABLES AND CONSTRUCTORS

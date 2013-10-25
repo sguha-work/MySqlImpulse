@@ -4,11 +4,21 @@
 *the query queue is maintained by the Cache MAnage class
 */
 class QueryQueue {
-	private $QuesueArray = array();//Main Query array
-	private $QueueSize   = 0;//Max queue size
-	private $Front       = -1;//Front index value through where query will be inserted in queue
-	private $Rear        = -1;//Rear value through where query will be deleted
-	private $QueueIndex  = -1;//Index of the lates item which is replaced
+
+	//Main Query array
+	private $QuesueArray = array();
+
+	//Max queue size
+	private $QueueSize   = 0;
+	
+	//Front index value through where query will be inserted in queue
+	private $Front       = -1;
+	
+	//Rear value through where query will be deleted
+	private $Rear        = -1;
+
+	//Index of the lates item which is replaced
+	private $QueueIndex  = -1;
 	
 	private function __construct() {
 		slef::$QueueSize = MAX_CACHE_SIZE;
@@ -22,14 +32,20 @@ class QueryQueue {
 		return $queryQueue_object;
 	}
 	
+	/**
+	*This functions receives a query as an argument and insert the query in the query array it returned the 
+	*index where the query is inserted
+	*/
 	public function insertInQueue( $query ) {
 		if( self::$Front == -1 && self::$Rear == -1 && self::$QueueIndex == -1 ) {
 			self::$Front += 1;
 			self::$Rear  += 1;
 			self::$QueueIndex  += 1;
 		}
+		$index = 0;
 		if( self::$Front >= self::$QueueSize ) {
 			self::$QuesueArray[ self::$QueueIndex ] = $query;
+			$index = self::$QueueIndex;
 			self::$QueueIndex += 1;
 			if( self::$QueueIndex >= self::$QueueSize ) {
 				self::$QueueIndex = 0;
@@ -37,6 +53,7 @@ class QueryQueue {
 		}
 		else {
 			self::$QuesueArray[self::$Front] = $query;	
+			$index = self::$Front;
 			self::$Front += 1;
 		}
 		return $index;

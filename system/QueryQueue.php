@@ -23,7 +23,7 @@ class QueryQueue {
 	}
 	
 	public function insertInQueue( $query ) {
-		if( self::$Front == self::$Rear == self::$Rear -1 ) {
+		if( self::$Front == -1 && self::$Rear == -1 && self::$QueueIndex == -1 ) {
 			self::$Front += 1;
 			self::$Rear  += 1;
 			self::$QueueIndex  += 1;

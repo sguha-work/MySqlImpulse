@@ -15,7 +15,7 @@ class Cache
 	/**
 	*This function returns the Cahce object
 	*/
-	public static getCacheObject() {
+	public static function getCacheObject() {
 		static $cache_object = NULL;
 		if( $cache_object == NULL ) {
 			$cache_object = new Cache();
@@ -42,7 +42,7 @@ class Cache
 	public function getFromCache( $index = NULL )
 	{
       if( $index == NULL ) {
-      	die("Error:No Index Specified.Unable to read from cahce")
+      	die("Error:No Index Specified.Unable to read from cahce");
       }
       $data = unserialize(self :: $CacheArray[ $index ]);
       return $data;

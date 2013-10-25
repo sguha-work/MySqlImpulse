@@ -6,5 +6,8 @@ class CacheManager
 	function __construct() {
 
 	}
+	public function isQueryExitsInCache($query) {
+		
+	}
 }
 ?>

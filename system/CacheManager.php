@@ -6,6 +6,11 @@ class CacheManager
 	function __construct() {
 
 	}
+        /**
+         * This function checks wheather the query exits in the query queue or not
+         * 
+         * 
+         */
 	public function isQueryExitsInCache($query) {
 		$queryQueue_object = $this->getQueryQueueInstance();
                 return($queryQueue_object->isQueryExists($query));
@@ -18,6 +23,17 @@ class CacheManager
          * 
          */
         public function getCachedData($query) {
+            if($this->isQueryExitsInCache($query)==FALSE){
+                return FALSE;
+            }
+
+        }
+        /**
+         * This function save the query into query array and the dataArray to cache
+         * 
+         * 
+         */
+        public function saveDataToCache($query, $dataArray) {
             
         }
         /**

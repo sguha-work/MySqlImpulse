@@ -21,7 +21,7 @@ class QueryQueue {
 	private static $QueueIndex  = -1;
 	
 	private function __construct() {
-		self::$QueueSize = MAX_CACHE_SIZE;
+		self :: $QueueSize = MAX_CACHE_SIZE;
 	}
 	
 	public static function getQueryQueueInstance() {
@@ -37,24 +37,24 @@ class QueryQueue {
 	*index where the query is inserted
 	*/
 	public function insertInQueue( $query ) {
-		if( self::$Front == -1 && self::$Rear == -1 && self::$QueueIndex == -1 ) {
-			self::$Front += 1;
-			self::$Rear  += 1;
-			self::$QueueIndex  += 1;
+		if( self :: $Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1 ) {
+			self :: $Front += 1;
+			self :: $Rear  += 1;
+			self :: $QueueIndex  += 1;
 		}
 		$index = 0;
-		if( self::$Front >= self::$QueueSize ) {
-			self::$QueryArray[ self::$QueueIndex ] = $query;
-			$index = self::$QueueIndex;
-			self::$QueueIndex += 1;
-			if( self::$QueueIndex >= self::$QueueSize ) {
-				self::$QueueIndex = 0;
+		if( self :: $Front >= self :: $QueueSize ) {
+			self :: $QueryArray[ self :: $QueueIndex ] = $query;
+			$index = self :: $QueueIndex;
+			self :: $QueueIndex += 1;
+			if( self :: $QueueIndex >= self :: $QueueSize ) {
+				self :: $QueueIndex = 0;
 			}
 		}
 		else {
-			self::$QueryArray[self::$Front] = $query;	
-			$index = self::$Front;
-			self::$Front += 1;
+			self::$QueryArray[self :: $Front] = $query;	
+			$index = self :: $Front;
+			self :: $Front += 1;
 		}
 		return $index;
 	}

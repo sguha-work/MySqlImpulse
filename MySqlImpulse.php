@@ -104,23 +104,30 @@ final class MySqlImpulse {
   *This function execute the select query
   */
   private function executeSelectQuery($selectQuery) {
-    $_mysqliInstance=$this->getMySqliObject();
-    try {
-      $selectResultSet=$_mysqliInstance->query($selectQuery);//GETTING RESULTSET BYEXECUTING THE QUERY
+    $cacheManagerObject = new CacheManager();
+    if($cacheManagerObject->isQueryExitsInCache($selectQuery)==FALSE) {
+        $_mysqliInstance=$this->getMySqliObject();
+        try {
+          $selectResultSet=$_mysqliInstance->query($selectQuery);//GETTING RESULTSET BYEXECUTING THE QUERY
+        }
+        catch(Exception $ex) {
+          die(DATABASE_ERROR);
+        }
+        $affectedRow=$_mysqliInstance->affected_rows;
+        if($affectedRow==0)
+          return 0;
+        $selectedRows=array();
+        while($selectedRow=$selectResultSet->fetch_array(MYSQLI_BOTH)) {
+            array_push($selectedRows,$selectedRow);
+          }
+          $selectResultSet->free();
+          $_mysqliInstance->close();
+          $cacheManagerObject->saveDataToCache($selectQuery, $selectedRows);
+          return $selectedRows;
     }
-    catch(Exception $ex) {
-      die(DATABASE_ERROR);
+    else {
+        
     }
-    $affectedRow=$_mysqliInstance->affected_rows;
-    if($affectedRow==0)
-      return 0;
-    $selectedRows=array();
-    while($selectedRow=$selectResultSet->fetch_array(MYSQLI_BOTH)) {
-        array_push($selectedRows,$selectedRow);
-      }
-      $selectResultSet->free();
-      $_mysqliInstance->close();
-      return $selectedRows;
   }
 
   /**

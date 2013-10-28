@@ -6,19 +6,19 @@
 class QueryQueue {
 
 	//Main Query array
-	private $QueryArray = array();
+	private static $QueryArray = array();
 
 	//Max queue size
-	private $QueueSize   = 0;
+	private static $QueueSize   = 0;
 	
 	//Front index value through where query will be inserted in queue
-	private $Front       = -1;
+	private static $Front       = -1;
 	
 	//Rear value through where query will be deleted
-	private $Rear        = -1;
+	private static $Rear        = -1;
 
 	//Index of the lates item which is replaced
-	private $QueueIndex  = -1;
+	private static $QueueIndex  = -1;
 	
 	private function __construct() {
 		slef::$QueueSize = MAX_CACHE_SIZE;

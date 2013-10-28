@@ -7,7 +7,7 @@
 
 class Cache
 {
-	private $CacheArray=array();
+	private static $CacheArray=array();
 	private function __construct() {
 
 	}

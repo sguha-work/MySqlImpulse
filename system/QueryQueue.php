@@ -60,7 +60,9 @@ class QueryQueue {
 	}
 
 	/**
-	*This function receives a query as the 
+	*This function receives a query as the argument and checks whether
+        *the query exits in queue or not.If exists the function returned
+        *the index of the query else return FALSE  
 	*/
 	public function isQueryExists($inputQuery = NULL) {
 		if($inputQuery == NULL) {

@@ -69,6 +69,8 @@ class QueryQueue {
 			die("Error:No Query specified");
 		}
 		else {
+                        if(self ::$Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1)
+                            return FALSE;
 			$index = 0;
 			foreach(self :: $QueryArray as $query) {
 				if($query == $inputQuery) {

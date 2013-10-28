@@ -27,12 +27,12 @@ class Cache
 	*This function receives the index and data as argument and stored the data to the given index of 
 	*proper index after making the data serialize
 	*/
-	public function writeToCache( $index = NULL, $data ) {
+	public function writeToCache($data, $index = NULL) {
 	  $serializeData = serialize($data);	
       if( $index == NULL ) {
       	die("Error:No Index Specified.Unable to write cahce");
       }
-      self :: $CacheArray[ $index ] = serialize( $data );
+      self :: $CacheArray[ $index ] = $serializeData;
       return true;
 	}
 	

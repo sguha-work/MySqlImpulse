@@ -21,7 +21,7 @@ class QueryQueue {
 	private static $QueueIndex  = -1;
 	
 	private function __construct() {
-		slef::$QueueSize = MAX_CACHE_SIZE;
+		self::$QueueSize = MAX_CACHE_SIZE;
 	}
 	
 	public static function getQueryQueueInstance() {

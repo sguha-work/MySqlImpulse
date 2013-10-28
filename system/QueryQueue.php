@@ -6,7 +6,7 @@
 class QueryQueue {
 
 	//Main Query array
-	private $QuesueArray = array();
+	private $QueryArray = array();
 
 	//Max queue size
 	private $QueueSize   = 0;
@@ -44,7 +44,7 @@ class QueryQueue {
 		}
 		$index = 0;
 		if( self::$Front >= self::$QueueSize ) {
-			self::$QuesueArray[ self::$QueueIndex ] = $query;
+			self::$QueryArray[ self::$QueueIndex ] = $query;
 			$index = self::$QueueIndex;
 			self::$QueueIndex += 1;
 			if( self::$QueueIndex >= self::$QueueSize ) {
@@ -52,12 +52,30 @@ class QueryQueue {
 			}
 		}
 		else {
-			self::$QuesueArray[self::$Front] = $query;	
+			self::$QueryArray[self::$Front] = $query;	
 			$index = self::$Front;
 			self::$Front += 1;
 		}
 		return $index;
 	}
 
+	/**
+	*This function receives a query as the 
+	*/
+	public function isQueryExists($inputQuery = NULL) {
+		if($inputQuery == NULL) {
+			die("Error:No Query specified");
+		}
+		else {
+			$index = 0;
+			foreach(self :: $QueryArray as $query) {
+				if($query == $inputQuery) {
+					return $index;
+				}
+				$index += 1;
+			}
+			return FALSE;
+		}
+	}
 }
 ?>

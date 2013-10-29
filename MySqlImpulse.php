@@ -48,12 +48,11 @@ final class MySqlImpulse {
   *return FALSE if select query is unable fetch any data from database
   */
 	final public function executeQuery($query,$dataArray=array()) {
-   	 $sqlQuery=$query;
-   	 if(count($dataArray)!=0)
-    	  {
-    	  	$sqlQuery=$this->buildQuery($query,$dataArray);
-    	  }
-   	 return $this->execute($sqlQuery);
+   	$sqlQuery=$query;
+   	if(count($dataArray)!=0) {
+	  	$sqlQuery=$this->buildQuery($query,$dataArray);
+	  }
+   	return $this->execute($sqlQuery);
 	}
  /**
  *This function is responsible for executing a query directly,that means
@@ -63,8 +62,8 @@ final class MySqlImpulse {
  *return FALSE if select query is unable fetch any data from database
  */
 	final public function executeDirectQuery($query,$dataArray=array())	{
-      $sqlQuery=$this->buildQuery($query,$dataArray,false);
-      return $this->execute($sqlQuery);
+    $sqlQuery=$this->buildQuery($query,$dataArray,false);
+    return $this->execute($sqlQuery);
 	}
 
   /**
@@ -137,45 +136,45 @@ final class MySqlImpulse {
   private function getMySqliObject() {
     $_mysqliObject=new mysqli($this->_databaseAddress,$this->_databaseUserName,$this->_databasePassword,$this->_databaseName);
     if($_mysqliObject->connect_errno!=0) {
-        die(CONNECTION_ERROR);
-      }
+      die(CONNECTION_ERROR);
+    }
     else {
-        return $_mysqliObject;
-      }
+      return $_mysqliObject;
+    }
   }
 
   /**
   *This function builds the query from the query and the data array
   */
 	private function buildQuery($query,$dataArray,$checkData=true) {
-       $numberOfQuestionMark=substr_count($query,"?");
-       $numberOfDataInDataArray=count($dataArray); 
-       if($numberOfQuestionMark!=$numberOfDataInDataArray) {
-          die(NOT_ENOUGH_ARGUMENT_SUPPLIED);
+    $numberOfQuestionMark=substr_count($query,"?");
+    $numberOfDataInDataArray=count($dataArray); 
+    if($numberOfQuestionMark!=$numberOfDataInDataArray) {
+      die(NOT_ENOUGH_ARGUMENT_SUPPLIED);
+    }
+  	$sqlQuery="";
+    $queryLength=strlen($query);
+    $queryArray=str_split($query);
+    $index=0;
+    for($counter=0;$counter<$queryLength;$counter++) {
+      if($queryArray[$counter]=="?") {
+        if($checkData) {
+         	$data=$this->cleanData($dataArray[$index]);
         }
-  	   $sqlQuery="";
-       $queryLength=strlen($query);
-       $queryArray=str_split($query);
-       $index=0;
-       for($counter=0;$counter<$queryLength;$counter++) {
-          if($queryArray[$counter]=="?") {
-             if($checkData) {
-             	$data=$this->cleanData($dataArray[$index]);
-             }
-             else {
-             	$data=$dataArray[$index];
-             }
-             $index+=1;
-             $sqlQuery.=$data;
-          }
-          else {
-          	$sqlQuery.=$queryArray[$counter];
-          }
-       }
-       return $sqlQuery;
+        else {
+        	$data=$dataArray[$index];
+        }
+        $index+=1;
+        $sqlQuery.=$data;
+      }
+      else {
+       	$sqlQuery.=$queryArray[$counter];
+      }
+    }
+    return $sqlQuery;
 	}
 	private function cleanData($data) {
-	 $_mysqliInstance=$this->getMySqliObject();
+	  $_mysqliInstance=$this->getMySqliObject();
 	  $string = strip_tags($data);
     if(get_magic_quotes_gpc()) {
       $string = stripslashes($string);
@@ -195,7 +194,6 @@ final class MySqlImpulse {
       $maxValue=intval($row['id']);
       return $maxValue;
     }
-
   }  
 }
 ?>

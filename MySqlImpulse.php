@@ -104,7 +104,8 @@ final class MySqlImpulse {
   */
   private function executeSelectQuery($selectQuery) {
     $cacheManagerObject = new CacheManager();
-    if($cacheManagerObject->isQueryExitsInCache($selectQuery)==FALSE) {
+    $isQueryExists = $cacheManagerObject->isQueryExitsInCache($selectQuery);
+    if($isQueryExists == FALSE && $isQueryExists != 0) {
         $_mysqliInstance=$this->getMySqliObject();
         try {
           $selectResultSet=$_mysqliInstance->query($selectQuery);//GETTING RESULTSET BYEXECUTING THE QUERY

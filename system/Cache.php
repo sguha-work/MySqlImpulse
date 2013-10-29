@@ -28,12 +28,12 @@ class Cache
 	*proper index after making the data serialize
 	*/
 	public function writeToCache($data, $index = NULL) {
-	  $serializeData = serialize($data);	
-      if( $index == NULL ) {
-      	die("Error:No Index Specified.Unable to write cahce");
-      }
-      self :: $CacheArray[$index] = $serializeData;
-      return true;
+            $serializeData = serialize($data);	
+            if(($index == NULL) && ($index != 0)) {
+                die("Error:No Index Specified.Unable to write cahce");
+            }
+            self :: $CacheArray[$index] = $serializeData;
+            return true;
 	}
 	
 	/**
@@ -41,7 +41,7 @@ class Cache
 	*/
 	public function getFromCache($index = NULL)
 	{
-            if($index == NULL) {
+            if(($index == NULL) && ($index != 0)) {
               die("Error:No Index Specified.Unable to read from cahce");
             }
             $data = unserialize(self :: $CacheArray[$index]);

@@ -34,10 +34,10 @@ class CacheManager
          * 
          */
         public function saveDataToCache($query, $dataArray) {
-            $queryQueueObject = $this->getQueryQueueInstance();
-            $index = $queryQueueObject ->insertInQueue($query);
-            $cacheObject = $this ->getCacheInstance();
-            $cacheObject ->writeToCache($dataArray, $index);
+            $queryQueueObject = $this-> getQueryQueueInstance();
+            $index = $queryQueueObject -> insertInQueue($query);
+            $cacheObject = $this -> getCacheInstance();
+            $cacheObject -> writeToCache($dataArray, $index);
         }
         /**
          * This function returns te data from cache,as an argument it receives

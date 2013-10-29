@@ -40,6 +40,17 @@ class CacheManager
             $cacheObject ->writeToCache($dataArray, $index);
         }
         /**
+         * This function returns te data from cache,as an argument it receives
+         * the query and returned the array of rows
+         * 
+         */
+        public function getDataFromCache($query) {
+            $queryQueueObject = $this->getQueryQueueInstance();
+            $index = $queryQueueObject ->insertInQueue($query);
+            $cacheObject = $this ->getCacheInstance();
+            return $cacheObject -> getFromCache($index);
+        }
+        /**
          * This function returnes the query queue instance
          * 
          */

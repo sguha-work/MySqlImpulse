@@ -114,20 +114,21 @@ final class MySqlImpulse {
           die(DATABASE_ERROR);
         }
         $affectedRow=$_mysqliInstance->affected_rows;
-        if($affectedRow==0)
+        if($affectedRow==0) {
           return 0;
+        }
         $selectedRows=array();
-        while($selectedRow=$selectResultSet->fetch_array(MYSQLI_BOTH)) {
-            array_push($selectedRows,$selectedRow);
-          }
-          $selectResultSet->free();
-          $_mysqliInstance->close();
-          $cacheManagerObject->saveDataToCache($selectQuery, $selectedRows);
-          return $selectedRows;
+        while($selectedRow=$selectResultSet -> fetch_array(MYSQLI_BOTH)) {
+            array_push($selectedRows, $selectedRow);
+        }
+        $selectResultSet -> free();
+        $_mysqliInstance -> close();
+        $cacheManagerObject -> saveDataToCache($selectQuery, $selectedRows);
     }
     else {
-        
+       $selectedRows = $cacheManagerObject -> getDataFromCache($selectQuery); 
     }
+    return $selectedRows;
   }
 
   /**

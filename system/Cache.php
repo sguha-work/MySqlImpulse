@@ -32,20 +32,20 @@ class Cache
       if( $index == NULL ) {
       	die("Error:No Index Specified.Unable to write cahce");
       }
-      self :: $CacheArray[ $index ] = $serializeData;
+      self :: $CacheArray[$index] = $serializeData;
       return true;
 	}
 	
 	/**
 	*This function receives the index of the cache array and returns the unserialized data from cache array
 	*/
-	public function getFromCache( $index = NULL )
+	public function getFromCache($index = NULL)
 	{
-      if( $index == NULL ) {
-      	die("Error:No Index Specified.Unable to read from cahce");
-      }
-      $data = unserialize(self :: $CacheArray[ $index ]);
-      return $data;
+            if($index == NULL) {
+              die("Error:No Index Specified.Unable to read from cahce");
+            }
+            $data = unserialize(self :: $CacheArray[$index]);
+            return $data;
 	}
 }
 ?>

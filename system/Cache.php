@@ -7,7 +7,7 @@
 
 class Cache
 {
-	private static $CacheArray=array();
+	private $CacheArray=array();
 	private function __construct() {
 
 	}
@@ -32,7 +32,7 @@ class Cache
             if(($index == NULL) && ($index != 0)) {
                 die("Error:No Index Specified.Unable to write cahce");
             }
-            self :: $CacheArray[$index] = $serializeData;
+            $this -> CacheArray[$index] = $serializeData;
             return true;
 	}
 	
@@ -44,7 +44,7 @@ class Cache
             if(($index == NULL) && ($index != 0)) {
               die("Error:No Index Specified.Unable to read from cahce");
             }
-            $data = unserialize(self :: $CacheArray[$index]);
+            $data = unserialize($this -> CacheArray[$index]);
             return $data;
 	}
 }

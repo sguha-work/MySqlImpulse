@@ -6,22 +6,22 @@
 class QueryQueue {
 
 	//Main Query array
-	private static $QueryArray = array();
+	private $QueryArray = array();
 
 	//Max queue size
-	private static $QueueSize   = 0;
+	private $QueueSize   = 0;
 	
 	//Front index value through where query will be inserted in queue
-	private static $Front       = -1;
+	private $Front       = -1;
 	
 	//Rear value through where query will be deleted
-	private static $Rear        = -1;
+	private $Rear        = -1;
 
 	//Index of the lates item which is replaced
-	private static $QueueIndex  = -1;
+	private $QueueIndex  = -1;
 	
 	private function __construct() {
-		self :: $QueueSize = MAX_CACHE_SIZE;
+		$this -> QueueSize = MAX_CACHE_SIZE;
 	}
 	
 	public static function getQueryQueueInstance() {
@@ -37,24 +37,24 @@ class QueryQueue {
 	*index where the query is inserted
 	*/
 	public function insertInQueue( $query ) {
-		if( self :: $Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1 ) {
-			self :: $Front += 1;
-			self :: $Rear  += 1;
-			self :: $QueueIndex  += 1;
+		if( $this -> Front == -1 && $this ->  $Rear == -1 && $this ->  $QueueIndex == -1 ) {
+			$this -> Front += 1;
+			$this -> Rear  += 1;
+			$this -> QueueIndex  += 1;
 		}
 		$index = 0;
-		if( self :: $Front >= self :: $QueueSize ) {
-			self :: $QueryArray[ self :: $QueueIndex ] = $query;
-			$index = self :: $QueueIndex;
-			self :: $QueueIndex += 1;
-			if( self :: $QueueIndex >= self :: $QueueSize ) {
-				self :: $QueueIndex = 0;
+		if( $this -> Front >= $this ->  $QueueSize ) {
+			$this -> QueryArray[ $this ->  $QueueIndex ] = $query;
+			$index = $this -> QueueIndex;
+			$this -> QueueIndex += 1;
+			if( $this -> QueueIndex >= $this -> QueueSize ) {
+				$this -> QueueIndex = 0;
 			}
 		}
 		else {
-			self::$QueryArray[self :: $Front] = $query;	
-			$index = self :: $Front;
-			self :: $Front += 1;
+			self::$QueryArray[$this -> Front] = $query;	
+			$index = $this -> Front;
+			$this -> Front += 1;
 		}
 		return $index;
 	}
@@ -69,10 +69,10 @@ class QueryQueue {
 			die("Error:No Query specified");
 		}
 		else {
-                        if(self :: $Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1)
+                        if($this -> Front == -1 && $this -> Rear == -1 && $this -> QueueIndex == -1)
                             return FALSE;
 			$index = 0;
-			foreach(self :: $QueryArray as $query) {
+			foreach($this ->  $QueryArray as $query) {
 				if($query == $inputQuery) {
 					return $index;
 				}

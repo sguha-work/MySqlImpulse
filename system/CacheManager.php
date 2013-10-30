@@ -46,9 +46,7 @@ class CacheManager
          * the query and returned the array of rows
          * 
          */
-        public function getDataFromCache($query) {
-            $queryQueueObject = $this -> getQueryQueueObject();
-            $index = $queryQueueObject -> isQueryExists($query);
+        public function getDataFromCache($index) {
             $cacheObject = $this -> getCacheInstance();
             return $cacheObject -> getFromCache($index);
         }

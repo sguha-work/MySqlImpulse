@@ -127,7 +127,8 @@ final class MySqlImpulse {
         $cacheManagerObject -> saveDataToCache($index, $selectedRows);
     }
     else {
-       $selectedRows = $cacheManagerObject -> getDataFromCache($selectQuery); 
+       $index = $isQueryExists;//if $isQueryExists is not "FALSE" then it must be the index of the query in queryQueue
+       $selectedRows = $cacheManagerObject -> getDataFromCache($index); 
     }
     return $selectedRows;
   }

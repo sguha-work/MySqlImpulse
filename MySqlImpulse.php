@@ -123,7 +123,8 @@ final class MySqlImpulse {
         }
         $selectResultSet -> free();
         $_mysqliInstance -> close();
-        $cacheManagerObject -> saveDataToCache($selectQuery, $selectedRows);
+        $index =$cacheManagerObject -> saveQueryToQueryArray($selectQuery);
+        $cacheManagerObject -> saveDataToCache($index, $selectedRows);
     }
     else {
        $selectedRows = $cacheManagerObject -> getDataFromCache($selectQuery); 

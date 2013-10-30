@@ -7,7 +7,8 @@
 
 class Cache
 {
-	private $CacheArray=array();
+	private static $CacheArray = array();
+	private static $cache_object = NULL;
 	private function __construct() {
 
 	}
@@ -16,11 +17,11 @@ class Cache
 	*This function returns the Cahce object
 	*/
 	public static function getCacheObject() {
-		static $cache_object = NULL;
-		if( $cache_object == NULL ) {
-			$cache_object = new Cache();
+		
+		if( self :: $cache_object == NULL ) {
+			self :: $cache_object = new Cache();
 		}
-		return $cache_object;
+		return self :: $cache_object;
 	}
 	
 	/**
@@ -29,7 +30,7 @@ class Cache
 	*/
 	public function writeToCache($data, $index) {
             $serializeData = serialize($data);	
-            $this -> CacheArray[$index] = $serializeData;
+            self :: $CacheArray[$index] = $serializeData;
             return true;
 	}
 	
@@ -37,7 +38,7 @@ class Cache
 	*This function receives the index of the cache array and returns the unserialized data from cache array
 	*/
 	public function getFromCache($index)	{
-            $data = unserialize($this -> CacheArray[$index]);
+            $data = unserialize(self :: $CacheArray[$index]);
             return $data;
 	}
 }

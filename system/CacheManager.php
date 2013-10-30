@@ -28,14 +28,16 @@ class CacheManager
             }
 
         }
+        public function saveQueryToQueryArray($query) { 
+            $queryQueue_object = $this -> getQueryQueueObject();
+            return $queryQueue_object -> insertInQueue($query);
+        }
         /**
          * This function save the query into query array and the dataArray to cache
          * 
          * 
          */
-        public function saveDataToCache($query, $dataArray) {
-            $queryQueueObject = $this -> getQueryQueueObject();
-            $index = $queryQueueObject -> insertInQueue($query);
+        public function saveDataToCache($index, $dataArray) {
             $cacheObject = $this -> getCacheInstance();
             $cacheObject -> writeToCache($dataArray, $index);
         }
@@ -46,7 +48,7 @@ class CacheManager
          */
         public function getDataFromCache($query) {
             $queryQueueObject = $this -> getQueryQueueObject();
-            $index = $queryQueueObject -> insertInQueue($query);
+            $index = $queryQueueObject -> isQueryExists($query);
             $cacheObject = $this -> getCacheInstance();
             return $cacheObject -> getFromCache($index);
         }

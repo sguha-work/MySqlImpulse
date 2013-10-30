@@ -39,7 +39,7 @@ class QueryQueue {
 	*index where the query is inserted
 	*/
 	public function insertInQueue( $query ) {
-		if( self :: $Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1 ) {echo "1";
+		if( self :: $Front == -1 && self :: $Rear == -1 && self :: $QueueIndex == -1 ) {
 			self :: $Front += 1;
 			self :: $Rear  += 1;
 			self :: $QueueIndex  += 1;

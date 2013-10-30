@@ -12,8 +12,8 @@ class CacheManager
          * 
          */
 	public function isQueryExitsInCache($query) {
-		$queryQueue_object = $this->getQueryQueueInstance();
-                return($queryQueue_object->isQueryExists($query));
+		$queryQueue_object = $this -> getQueryQueueObject();
+        return($queryQueue_object -> isQueryExists($query));
 	}
         /**
          * This function receives the query as an argument and checks first
@@ -23,7 +23,7 @@ class CacheManager
          * 
          */
         public function getCachedData($query) {
-            if($this->isQueryExitsInCache($query)==FALSE){
+            if($this -> isQueryExitsInCache($query) == FALSE){
                 return FALSE;
             }
 
@@ -34,7 +34,7 @@ class CacheManager
          * 
          */
         public function saveDataToCache($query, $dataArray) {
-            $queryQueueObject = $this-> getQueryQueueInstance();
+            $queryQueueObject = $this -> getQueryQueueObject();
             $index = $queryQueueObject -> insertInQueue($query);
             $cacheObject = $this -> getCacheInstance();
             $cacheObject -> writeToCache($dataArray, $index);
@@ -45,17 +45,17 @@ class CacheManager
          * 
          */
         public function getDataFromCache($query) {
-            $queryQueueObject = $this->getQueryQueueInstance();
-            $index = $queryQueueObject ->insertInQueue($query);
-            $cacheObject = $this ->getCacheInstance();
+            $queryQueueObject = $this -> getQueryQueueObject();
+            $index = $queryQueueObject -> insertInQueue($query);
+            $cacheObject = $this -> getCacheInstance();
             return $cacheObject -> getFromCache($index);
         }
         /**
          * This function returnes the query queue instance
          * 
          */
-	private function getQueryQueueInstance() {
-		$queryQueue_object = QueryQueue :: getQueryQueueInstance();
+	private function getQueryQueueObject() {
+		$queryQueue_object = QueryQueue :: getQueryQueueObject();
 		return $queryQueue_object;
 	}
         /**

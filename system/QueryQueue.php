@@ -24,7 +24,7 @@ class QueryQueue {
 		$this -> QueueSize = MAX_CACHE_SIZE;
 	}
 	
-	public static function getQueryQueueInstance() {
+	public static function getQueryQueueObject() {
 		static $queryQueue_object = NULL;
 		if( $queryQueue_object == NULL ) {
 			$queryQueue_object = new QueryQueue();
@@ -37,14 +37,14 @@ class QueryQueue {
 	*index where the query is inserted
 	*/
 	public function insertInQueue( $query ) {
-		if( $this -> Front == -1 && $this ->  $Rear == -1 && $this ->  $QueueIndex == -1 ) {
+		if( $this -> Front == -1 && $this ->  Rear == -1 && $this ->  QueueIndex == -1 ) {
 			$this -> Front += 1;
 			$this -> Rear  += 1;
 			$this -> QueueIndex  += 1;
 		}
 		$index = 0;
-		if( $this -> Front >= $this ->  $QueueSize ) {
-			$this -> QueryArray[ $this ->  $QueueIndex ] = $query;
+		if( $this -> Front >= $this -> QueueSize ) {
+			$this -> QueryArray[ $this -> QueueIndex ] = $query;
 			$index = $this -> QueueIndex;
 			$this -> QueueIndex += 1;
 			if( $this -> QueueIndex >= $this -> QueueSize ) {
@@ -52,7 +52,7 @@ class QueryQueue {
 			}
 		}
 		else {
-			self::$QueryArray[$this -> Front] = $query;	
+			$this -> QueryArray[$this -> Front] = $query;	
 			$index = $this -> Front;
 			$this -> Front += 1;
 		}
@@ -69,10 +69,10 @@ class QueryQueue {
 			die("Error:No Query specified");
 		}
 		else {
-                        if($this -> Front == -1 && $this -> Rear == -1 && $this -> QueueIndex == -1)
-                            return FALSE;
+            if($this -> Front == -1 && $this -> Rear == -1 && $this -> QueueIndex == -1)
+                return FALSE;
 			$index = 0;
-			foreach($this ->  $QueryArray as $query) {
+			foreach($this -> QueryArray as $query) {
 				if($query == $inputQuery) {
 					return $index;
 				}

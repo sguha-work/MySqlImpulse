@@ -27,11 +27,8 @@ class Cache
 	*This function receives the index and data as argument and stored the data to the given index of 
 	*proper index after making the data serialize
 	*/
-	public function writeToCache($data, $index = NULL) {
+	public function writeToCache($data, $index) {
             $serializeData = serialize($data);	
-            if(($index == NULL) && ($index != 0)) {
-                die("Error:No Index Specified.Unable to write cahce");
-            }
             $this -> CacheArray[$index] = $serializeData;
             return true;
 	}
@@ -39,11 +36,7 @@ class Cache
 	/**
 	*This function receives the index of the cache array and returns the unserialized data from cache array
 	*/
-	public function getFromCache($index = NULL)
-	{
-            if(($index == NULL) && ($index != 0)) {
-              die("Error:No Index Specified.Unable to read from cahce");
-            }
+	public function getFromCache($index)	{
             $data = unserialize($this -> CacheArray[$index]);
             return $data;
 	}

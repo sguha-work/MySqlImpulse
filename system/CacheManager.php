@@ -10,7 +10,7 @@ class CacheManager
          * This function checks wheather the query exits in the query queue or not
          * 
          * 
-         */
+        */
 	public function isQueryExitsInCache($query) {
 		$queryQueue_object = $this -> getQueryQueueObject();
         return($queryQueue_object -> isQueryExists($query));
@@ -21,7 +21,7 @@ class CacheManager
          * in the queue the it returnes the cached data else call the setCache(Query)
          * funtciotn
          * 
-         */
+        */
         public function getCachedData($query) {
             if($this -> isQueryExitsInCache($query) == FALSE){
                 return FALSE;
@@ -36,7 +36,7 @@ class CacheManager
          * This function save the query into query array and the dataArray to cache
          * 
          * 
-         */
+        */
         public function saveDataToCache($index, $dataArray) {
             $cacheObject = $this -> getCacheInstance();
             $cacheObject -> writeToCache($dataArray, $index);
@@ -45,7 +45,7 @@ class CacheManager
          * This function returns te data from cache,as an argument it receives
          * the query and returned the array of rows
          * 
-         */
+        */
         public function getDataFromCache($index) {
             $cacheObject = $this -> getCacheInstance();
             return $cacheObject -> getFromCache($index);
@@ -53,7 +53,7 @@ class CacheManager
         /**
          * This function returnes the query queue instance
          * 
-         */
+        */
 	private function getQueryQueueObject() {
 		$queryQueue_object = QueryQueue :: getQueryQueueObject();
 		return $queryQueue_object;
@@ -61,7 +61,7 @@ class CacheManager
         /**
          * This function returns the cache instance
          * 
-         */
+        */
 	private function getCacheInstance() {
 		$cache_object = Cache :: getCacheObject();
 		return $cache_object;

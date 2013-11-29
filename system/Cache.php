@@ -9,6 +9,7 @@ class Cache
 {
 	private static $CacheArray = array();
 	private static $cache_object = NULL;
+	
 	private function __construct() {
 
 	}

@@ -3,7 +3,7 @@ MySqlImpulse
 
 This is a PHP application to access the MySqlDataBase having inbuilt safety check for sql injection and cache management
 
-Main Class Description:
+Main Class Description :
 =======================
 
 CLASS TO ACCESS THE DATABASE.THE STEPS OF USING THIS CLASS IS DESCRIBED BELOW
